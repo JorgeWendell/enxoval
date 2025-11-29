@@ -35,8 +35,9 @@ const AuthenticationPage = async () => {
         <Image
           src="/capa.png"
           alt="Logo"
-          width={500}
-          height={500}
+          sizes="500vw"
+          width={0}
+          height={0}
           className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
         />
       </div>
