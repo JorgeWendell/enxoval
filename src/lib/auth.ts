@@ -31,11 +31,13 @@ export const auth = betterAuth({
     max: 100,
   },
   trustedOrigins: [
-    "http://localhost:3000",
-    "https://hotel.adelbr.tech",
-    "http://hotel.adelbr.tech:3000",
-    "http://192.168.15.53:3000",
+    "http://localhost:5100",
+    "https://enxoval.adelbr.tech",
+    "http://enxoval.adelbr.tech:5100",
+    "http://192.168.15.59:5100",
   ],
   baseURL:
-    process.env.NODE_ENV === "production" ? "http://hotel.adelbr.tech:3000" : "http://192.168.15.53:3000",
+    process.env.NODE_ENV === "production"
+      ? "http://enxoval.adelbr.tech:5100"
+      : "http://192.168.15.59:5100",
 });
