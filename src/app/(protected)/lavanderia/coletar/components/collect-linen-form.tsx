@@ -106,7 +106,7 @@ export function CollectLinenForm({ rooms }: CollectLinenFormProps) {
     }
 
     toast.success(
-      `${result.data?.data?.collected || 0} item(ns) coletado(s) com sucesso`
+      `${result.data?.collected || 0} item(ns) coletado(s) com sucesso`
     );
     form.reset();
     setAvailableItems([]);
@@ -193,11 +193,11 @@ export function CollectLinenForm({ rooms }: CollectLinenFormProps) {
                                       onCheckedChange={(checked) => {
                                         return checked
                                           ? field.onChange([
-                                              ...field.value,
+                                              ...(field.value || []),
                                               item.id,
                                             ])
                                           : field.onChange(
-                                              field.value?.filter(
+                                              (field.value || []).filter(
                                                 (value) => value !== item.id
                                               )
                                             );

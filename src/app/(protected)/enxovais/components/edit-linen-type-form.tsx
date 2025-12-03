@@ -30,14 +30,9 @@ import {
 const updateLinenTypeSchema = z.object({
   name: z.string().min(1, { message: "Nome é obrigatório" }),
   description: z.string().optional(),
-  category: z.enum(["cama", "banho", "mesa", "decoracao", "outros"], {
-    required_error: "Categoria é obrigatória",
-  }),
+  category: z.enum(["cama", "banho", "mesa", "decoracao", "outros"]),
   unit: z.string().min(1, { message: "Unidade é obrigatória" }),
-  minStock: z.coerce
-    .number()
-    .int()
-    .min(0, { message: "Estoque mínimo deve ser 0 ou maior" }),
+  minStock: z.number().int().min(0, { message: "Estoque mínimo deve ser 0 ou maior" }),
   imageUrl: z.string().url().optional().or(z.literal("")),
 });
 
@@ -80,11 +75,6 @@ export function EditLinenTypeForm({
 
     if (result?.serverError) {
       toast.error(result.serverError);
-      return;
-    }
-
-    if (result?.data?.error) {
-      toast.error(result.data.error);
       return;
     }
 

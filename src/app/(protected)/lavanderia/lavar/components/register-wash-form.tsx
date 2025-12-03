@@ -63,7 +63,7 @@ export function RegisterWashForm({ items }: RegisterWashFormProps) {
     }
 
     toast.success(
-      `${result.data?.data?.washed || 0} item(ns) registrado(s) como lavado(s)`
+      `${result.data?.washed || 0} item(ns) registrado(s) como lavado(s)`
     );
     form.reset();
     router.refresh();
@@ -110,11 +110,11 @@ export function RegisterWashForm({ items }: RegisterWashFormProps) {
                                       onCheckedChange={(checked) => {
                                         return checked
                                           ? field.onChange([
-                                              ...field.value,
+                                              ...(field.value || []),
                                               item.id,
                                             ])
                                           : field.onChange(
-                                              field.value?.filter(
+                                              (field.value || []).filter(
                                                 (value) => value !== item.id
                                               )
                                             );

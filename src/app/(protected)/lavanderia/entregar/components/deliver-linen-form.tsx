@@ -77,7 +77,7 @@ export function DeliverLinenForm({
 
     const isToStock = values.roomId === "estoque";
     toast.success(
-      `${result.data?.data?.delivered || 0} item(ns) ${isToStock ? "enviado(s) para estoque" : "entregue(s)"} com sucesso`
+      `${result.data?.delivered || 0} item(ns) ${isToStock ? "enviado(s) para estoque" : "entregue(s)"} com sucesso`
     );
     form.reset();
     router.refresh();
@@ -153,11 +153,11 @@ export function DeliverLinenForm({
                                       onCheckedChange={(checked) => {
                                         return checked
                                           ? field.onChange([
-                                              ...field.value,
+                                              ...(field.value || []),
                                               item.id,
                                             ])
                                           : field.onChange(
-                                              field.value?.filter(
+                                              (field.value || []).filter(
                                                 (value) => value !== item.id
                                               )
                                             );

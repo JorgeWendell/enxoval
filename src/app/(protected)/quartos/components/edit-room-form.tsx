@@ -29,17 +29,9 @@ import {
 
 const updateRoomSchema = z.object({
   number: z.string().min(1, { message: "Número do quarto é obrigatório" }),
-  floor: z.coerce
-    .number()
-    .int()
-    .positive({ message: "Andar deve ser um número positivo" }),
-  type: z.enum(["single", "double", "triple", "suite", "master"], {
-    required_error: "Tipo do quarto é obrigatório",
-  }),
-  capacity: z.coerce
-    .number()
-    .int()
-    .positive({ message: "Capacidade deve ser um número positivo" }),
+  floor: z.number().int().positive({ message: "Andar deve ser um número positivo" }),
+  type: z.enum(["single", "double", "triple", "suite", "master"]),
+  capacity: z.number().int().positive({ message: "Capacidade deve ser um número positivo" }),
   description: z.string().optional(),
   status: z.enum([
     "disponivel",

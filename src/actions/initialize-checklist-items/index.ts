@@ -42,7 +42,15 @@ export const initializeChecklistItems = actionClient
       .where(eq(linenItemsTable.roomId, parsedInput.roomId))
       .orderBy(linenItemsTable.createdAt);
 
-    const itemsToCreate = [];
+    type ChecklistItemInsert = {
+      id: string;
+      checklistId: string;
+      linenTypeId: string;
+      linenItemId: string | null;
+      status: "presente" | "ausente" | "danificado" | "substituido" | "sujo";
+    };
+
+    const itemsToCreate: ChecklistItemInsert[] = [];
 
     const existingChecklistItems = await db
       .select({
@@ -80,7 +88,7 @@ export const initializeChecklistItems = actionClient
 
     for (const item of currentItems) {
       if (!existingItemIds.has(item.id)) {
-        const itemStatus = item.status === "danificado" ? "danificado" : "presente";
+        const itemStatus: "presente" | "danificado" = item.status === "danificado" ? "danificado" : "presente";
         itemsToCreate.push({
           id: randomUUID(),
           checklistId: parsedInput.checklistId,
