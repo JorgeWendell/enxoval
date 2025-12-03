@@ -171,7 +171,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    const currentTheme = theme || "light";
+    setTheme(currentTheme === "dark" ? "light" : "dark");
   };
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -209,17 +210,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   {!mounted ? (
                     <>
                       <Moon />
-                      Dark Mode
+                      Alternar Tema
                     </>
                   ) : theme === "dark" ? (
                     <>
                       <Sun />
-                      Dark Mode
+                      Modo Claro
                     </>
                   ) : (
                     <>
                       <Moon />
-                      Dark Mode
+                      Modo Escuro
                     </>
                   )}
                 </DropdownMenuItem>
