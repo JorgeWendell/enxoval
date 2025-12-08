@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { PatternFormat } from "react-number-format";
 import { toast } from "sonner";
 import z from "zod";
 
@@ -35,6 +36,8 @@ const createLinenItemSchema = z.object({
   roomId: z.string().optional(),
   description: z.string().optional(),
   purchaseDate: z.string().optional(),
+  cnpjFornecedor: z.string().optional(),
+  nfe: z.string().optional(),
 });
 
 interface CreateLinenItemFormProps {
@@ -55,6 +58,8 @@ export function CreateLinenItemForm({ onSuccess }: CreateLinenItemFormProps) {
       roomId: "",
       description: "",
       purchaseDate: "",
+      cnpjFornecedor: "",
+      nfe: "",
     },
   });
 
@@ -89,6 +94,8 @@ export function CreateLinenItemForm({ onSuccess }: CreateLinenItemFormProps) {
       purchaseDate: values.purchaseDate
         ? new Date(values.purchaseDate)
         : undefined,
+      cnpjFornecedor: values.cnpjFornecedor || undefined,
+      nfe: values.nfe || undefined,
     });
 
     if (result?.serverError) {
@@ -187,6 +194,43 @@ export function CreateLinenItemForm({ onSuccess }: CreateLinenItemFormProps) {
                 <FormLabel>Data de Compra (Opcional)</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="cnpjFornecedor"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>CNPJ Fornecedor (Opcional)</FormLabel>
+                <FormControl>
+                  <PatternFormat
+                    format="##.###.###/####-##"
+                    mask="_"
+                    value={field.value}
+                    onValueChange={(values) => {
+                      field.onChange(values.value);
+                    }}
+                    customInput={Input}
+                    placeholder="00.000.000/0000-00"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="nfe"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>NFE (Opcional)</FormLabel>
+                <FormControl>
+                  <Input placeholder="Número da Nota Fiscal Eletrônica" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

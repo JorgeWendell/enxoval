@@ -151,6 +151,8 @@ export const linenItemsTable = pgTable("linen_items", {
   purchaseDate: timestamp("purchase_date"),
   lastWashDate: timestamp("last_wash_date"),
   notes: text("notes"),
+  cnpjFornecedor: text("cnpj_fornecedor"),
+  nfe: text("nfe"),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
